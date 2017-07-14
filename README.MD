@@ -4,7 +4,8 @@ Kafka使用示例
 | 目录 | 描述 |
 | -------- | -------- |
 | kafka-api | Kafka API使用示例 |
-| spring-kafka-01 | Spring Boot + Spring Kafka使用示例 |
+| spring-kafka-01 | Spring Boot + Spring Kafka使用示例01 |
+| spring-kafka-02 | Spring Boot + Spring Kafka使用示例02 |
 
 ## 参考文档
 
