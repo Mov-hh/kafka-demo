@@ -1,0 +1,46 @@
+##########################
+# Kafka配置
+# [注] 并未使用Spring Boot提供的默认KafkaTemplate Bean，而是自定义实现
+##########################
+kafka:
+  servers: 192.168.9.79:19092,192.168.9.81:19092,192.168.9.82:19092
+
+##########################
+# Java Properties语法配置
+##########################
+## Consumer端配置
+#spring.kafka.consumer.group-id=${random.uuid}
+#spring.kafka.consumer.auto-offset-reset=earliest
+#spring.kafka.consumer.bootstrap-servers=192.168.9.79:19092,192.168.9.81:19092,192.168.9.82:19092
+#
+## Producer端配置
+#spring.kafka.producer.bootstrap-servers=192.168.9.79:19092,192.168.9.81:19092,192.168.9.82:19092
+#spring.kafka.producer.retries=5
+#spring.kafka.producer.acks=all
+#spring.kafka.producer.batch-size=16384
+#spring.kafka.producer.buffer-memory=33554432
+#spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+#spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+
+
+##########################
+# YAML语法配置
+# [WARNING] 无法直接配置`spring.producer.max.in.flight.requests.per.connection`
+##########################
+#spring:
+#  kafka:
+#    consumer:
+#      group-id: ${random.uuid}
+#      auto-offset-reset: earliest
+#      bootstrap-servers: 192.168.9.79:19092,192.168.9.81:19092,192.168.9.82:19092
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    producer:
+#      bootstrap-servers: ${spring.kafka.consumer.bootstrap-servers}
+#      retries: 5
+#      acks: all
+#      batch-size: 16384
+#      buffer-memory: 33554432
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+

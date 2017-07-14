@@ -19,7 +19,9 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    public static Logger logger = LoggerFactory.getLogger(Application.class);
+    private static Logger logger = LoggerFactory.getLogger(Application.class);
+
+    public static final String TEST_TOPIC = "test-04";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args).close();
@@ -32,15 +34,16 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.template.send("myTopic", "foo1");
-        this.template.send("myTopic", "foo2");
-        this.template.send("myTopic", "foo3");
+        for (int i = 0; i < 3; i++) {
+            logger.info("Sending message: foo{}", i);
+            this.template.send(TEST_TOPIC, "foo" + i);
+        }
 
         latch.await(60, TimeUnit.SECONDS);
         logger.info("All received");
     }
 
-    @KafkaListener(topics = "myTopic")
+    @KafkaListener(topics = TEST_TOPIC)
     public void listen(ConsumerRecord<?, ?> cr) throws Exception {
         logger.info("Get message: {}", cr.toString());
         latch.countDown();
